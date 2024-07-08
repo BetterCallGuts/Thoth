@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block title %}{% if lang == 'ar' %} {{course.name_ar}}{% elif lang == 'en' %} {{course.name_en}}{% endif%} {% endblock title %}
+
+{% block extralink %}
+
+    <link rel="stylesheet" href="{% static 'css/pages/payment.css' %}">
+{% endblock extralink %}
+
+
+
+{% block content %}
+
+{% endblock content %}
+    

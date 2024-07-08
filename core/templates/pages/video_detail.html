@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% if lang == 'ar' %} {{course.name_ar}}{% elif lang == 'en' %} {{course.name_en}}{% endif%} {% endblock title %}
+
+
+{% block extralink %}
+<link rel="stylesheet" href="{% static 'css/pages/video_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/courses.css' %}">
+
+{% endblock extralink %}
+{% block content %}
+<main>
+    
+    
+    
+    <div class="wrapper">
+        <div class="container">
+        {% for vid in videos %}
+        <a href='{% 
+        
+        
+        
+        
+        
+        "courses:video_detail" lang course.pk  vid.pk %}' class="card">
+    
+            <img src="{{vid.banner.url}}" alt="{{vid.name_en}}">
+            
+            <p class="name">{% if lang == "en" %} {{vid.name_en}}   {% elif lang  == "ar" %} {{vid.name_ar}} {% endif %}</p>
+
+            <p class="description">{% if lang == 'en' %} {{vid.descr_ar|truncatewords:10}} {% elif lang == "ar" %}  {{vid.descr_ar| truncatechars:60}}   {% endif %}</p>
+            
+        </a>
+    
+    
+        {% endfor %}
+        </div>
+    </div>
+
+
+
+
+</main>
+{% endblock content %}

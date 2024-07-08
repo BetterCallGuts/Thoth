@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block title %}{% if lang == 'ar' %} أنواع الكورسات{% elif lang == 'en' %}course categories{% endif%} {% endblock title %}
+
+{% block extralink %}
+
+    <link rel="stylesheet" href="{% static 'css/pages/courses_categories.css' %}">
+{% endblock extralink %}
+
+
+
+{% block content %}
+
+
+<main>
+
+    {% for categorie in categories %}
+    <a href="{% url 'core:couese_list_view' lang=lang course=categorie.name_en %}">
+        <img {% if categorie.banner %} src="{{categorie.banner.url}}" {% else %} src="" {% endif %}   alt="{{categorie.name_en}}">
+        {% if lang == "ar" %}
+
+        {{categorie.name_ar}}
+
+        {% elif lang == "en" %}
+        
+            {{categorie.name_en}}
+        {% endif %}
+    </a>
+    {% endfor %}
+    
+
+</main>
+
+{% endblock content %}
+    

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoth | {% block title %}{% endblock title %}</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static  'fonts-awesome/css/all.min.css' %}">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static  'css/main.css' %}">
+
+    {% block extralink %}{% endblock extralink %}
+    
+<script type="text/javascript">
+    function zoom() {
+        document.body.style.zoom = "65%" 
+    }
+    window.onload = zoom; 
+</script> 
+</head>
+    <body onload="zoom()">
+        {% include "components/navbar.html" %}
+
+        {%  block  content %}
+        {%  endblock content %}
+
+    <script src="{% static  'js/Navbar.js' %}" > </script>
+    <script src="{% static  'fonts-awesome/js/all.min.js' %}" ></script>
+    {% block extrascript %}
+    {% endblock extrascript %}
+</body>
+</html>

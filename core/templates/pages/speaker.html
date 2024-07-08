@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} 
+{% if lang == "en" %}
+Speakers
+{% elif lang == "ar" %}
+المتحدثون
+{% endif %}
+{% endblock title %}
+{% block extralink %}
+<link rel="stylesheet" href="{% static 'css/pages/speaker.css' %}">
+{% endblock extralink %}
+{% block content %}
+
+
+<main id="main__content">
+
+
+</main>
+
+{% endblock content %}

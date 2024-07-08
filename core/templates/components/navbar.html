@@ -1,0 +1,132 @@
+{% load static %}
+<div class="navbar" id="Navbar" style="z-index: 1000;">
+    <!-- ACT Button -->
+    {% if not user.is_authenticated %}
+    <a href="{% url 'core:login' lang %}" class="navbar__act-button">
+
+        {% if lang == "en" %}
+        Login
+        {% elif lang == "ar" %}
+
+        تسجيل الدخول
+        {% endif %}
+    </a>
+    {% else %}
+    <form action="{% url 'core:logout'  %}" method="post">
+        {% csrf_token %}
+        <input 
+        style="color: var(--white);outline:none; background:rgba(0,0,0,1)"
+        type="submit" class="navbar__act-button" value="{% if lang == "en" %}Logout{% elif lang == "ar" %}تسجيل الخروج{% endif %}">
+    </form>
+    {% endif %}
+    
+
+    <ul class="navbar__links-list" dir="rtl"  style="z-index: 1000;">
+        <li class="{% if active == 'home' %}active{% endif %}">
+            <a href="/" dir="rtl">
+            {% if lang == "ar"  %}
+            الرئيسية
+            {% elif lang == "en" %}
+            Home
+            {% endif %}
+            </a>
+
+        </li>
+        <li>
+            <a href="/" dir="rtl">
+            {% if lang == "ar" %}
+                عن Thoth
+            {% elif lang == "en" %}
+                About Thoth
+            {% endif %}
+            </a>
+        </li>
+                <li class="{% if active == 'courses' %}active{% endif %}">
+            <a href="{% url 'courses:courses_categories' lang %}" class="" dir="rtl">
+            {% if lang == "ar" %}
+            دورات تدريبية
+            {% elif lang == "en" %}
+                Courses
+            {% endif %}
+            </a>
+            
+        </li>
+        <li class="{% if active == 'meetups' %}active{% endif %}">
+            <a href="{% url "core:meetups" lang %}" dir="rtl">
+            
+                {% if lang == "ar" %}
+                لقاءات
+                
+                {% elif lang == "en" %}
+                Meetups
+                {% endif %}
+            
+            </a>
+        </li>
+        <li class="{% if active == 'summits' %}active{% endif %}">
+            <a href="{% url "core:summit" lang %}" dir="rtl">
+            
+                {% if lang == "ar" %}
+                مؤتمرات
+                
+                {% elif lang == "en" %}
+                Summits
+                {% endif %}
+            
+            </a>
+        </li>
+        <li class="{% if active == 'workshops' %}active{% endif %}" />
+            <a href="{% url 'workshops:workshop' lang %}" dir="rtl">
+            
+                {% if lang == "ar" %}
+                ورشة عمل
+                
+                {% elif lang == "en" %}
+                Workshops
+                {% endif %}
+            
+            </a>
+        </li>
+        {% comment %} 31 /5 يوم نادى الجزيرة {% endcomment %}
+        <li>
+            <a href="/" dir="rtl">
+            {% if lang == "ar" %}
+            B2B
+            {% elif lang == "en" %}
+            B2B
+            {% endif %}    
+            
+            </a>
+        </li>
+        <li dir="ltr" >
+            {% if lang == "ar" %}
+            <a href="{% url 'core:change_lang' %}" dir="ltr">
+                English?
+            </a>
+            {% elif lang == "en" %}
+            
+            <a href="{% url 'core:change_lang' %}" dir="ltr">
+                العربية؟
+            </a>
+            {% endif %}    
+            
+        </li>
+
+    </ul>
+
+    <!-- Logo -->
+    
+    <a href="/" >
+    <div class="logo">
+        <div class="logo__image">
+            <img src="{% static  'image/logo_sm.png' %}" alt="Thoth Logo" />
+        </div>
+        <div class="logo__text">
+            Thoth<br />Business<br />Hub
+        </div>
+    </div>  
+    </a>
+</div>
+
+
+

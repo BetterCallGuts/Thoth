@@ -1,0 +1,139 @@
+
+
+
+
+
+
+
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% if lang == 'ar' %}تسجيل الدخول{% elif lang == 'en' %} Login{% endif%} {% endblock title %}
+
+{% block extralink %}
+<link rel="stylesheet" href="{% static 'css/pages/login.css' %}">
+{% endblock extralink %}
+
+{% block content %}
+<div class="line">
+    <img src="{% static 'image/line1.png' %}" alt="">
+    <img src="{% static 'image/line2.png' %}" alt="">
+    
+</div>
+<div class="wrapper">
+
+    
+    <div class="right__word">
+
+        {% if  lang == "ar"%}
+        
+        سجل  الآن بنقرة واحدة
+
+        {% elif lang == "en" %}
+        Join us with one click
+
+        {% endif %}
+
+
+    </div>
+    
+    
+    <main id="main__content">
+        <form method="post" id="login_form">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div id="messages" >
+                <div id="close__message">x</div>
+                {% if lang == 'ar' %}
+                  
+                تأكد من اسم المستخدم وكلمة المرور
+
+                {% elif lang == "en" %}
+                Incorrect Password or username 
+                {% endif %}
+
+            </div>
+            {% endif %}
+            <div class="username field">
+                <label for="id_username">
+                    {% if lang == 'en' %}
+
+                    Username:
+                    {% elif lang == 'ar' %}
+
+                    :اسم المستخدم
+                    {% endif %}
+                </label>
+                <input type="text" name="username" id="id_username" placeholder="{% if lang == 'ar' %}اسم المستخدم{% elif lang == 'en' %}Username{% endif %}" required>
+                
+            </div>
+            
+            <div class="password field">
+                <label for="id_password">
+                    {% if lang == "en" %}
+                      
+                    Password:
+                    {% elif lang == "ar" %}
+
+                    :كلمة المرور
+                    {% endif %}
+                </label>
+                <input type="password" name="password" id="id_password" placeholder="{% if lang == "en" %}Password:{% elif lang == "ar" %}:كلمة المرور{% endif %}" required>
+               
+            </div>
+            
+            <button type="submit">{% if lang == 'en' %}Submit {% elif lang == 'ar' %}تسجيل {% endif %}</button>
+
+
+
+            {% if lang == "ar" %}
+            <div class="down_form">
+
+                <span>
+                    لا يوجد لديك حساب؟ 
+
+                </span>
+                
+                <a href="{% url 'core:signup' lang  %}">
+                 
+                    
+                    انقر هنا
+                
+                </a>
+            </div>
+            {% elif lang == "en" %}
+            <div class="down_form">
+                <a href="{% url 'core:signup' lang  %}">
+                 
+                    
+                Click here
+                
+                </a>
+
+                <span>
+                    Don't have an account?
+                </span>
+                
+            </div>
+
+           
+            {% endif %}
+            
+        </form>
+    </main>
+</div>
+
+<script>
+    let xButton = document.getElementById("close__message");
+    let message = document.getElementById("messages");
+
+    xButton.addEventListener("click", ()=>{
+        message.remove()
+    })
+
+</script>
+    {% endblock content %}
+    

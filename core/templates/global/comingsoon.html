@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+
+    {% if lang == 'ar' %}{{title_ar}}{% elif lang == 'en' %}{{title_en}}{% endif%} 
+    
+{% endblock title %}
+
+{% block extralink %}
+    <link rel="stylesheet" href="{% static 'css/pages/comingsoon.css' %}">
+{% endblock extralink %}
+
+{% block content %}
+
+
+<div class="container">
+    <h1>
+        {% if lang == 'en' %}
+
+        Ready to make some noise?
+        {% elif lang == 'ar' %}
+
+        مستعد للإنضمام الينا؟
+        {% endif %}
+    </h1>
+    <img   src='{% static "image/5f8f3d84e2.gif" %}' />
+    
+    
+</div>
+<div class="buttons">
+    <a href="#">
+        {% if lang == 'en' %}
+        Let's start make a diffrent
+        {% elif lang == 'ar' %}
+        لنحدث تغييرا
+        {% endif %}
+    </a>
+</div>
+
+{% endblock content %}
+    

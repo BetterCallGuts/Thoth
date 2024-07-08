@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block title %}
+  {% if lang == 'ar' %}
+        {{course.name_ar}}
+  {% elif lang == 'en' %}
+        {{course.name_en}}
+  {% endif%} 
+{% endblock title %}
+
+{% block extralink %}
+
+    <link rel="stylesheet" href="{% static 'css/pages/workshops_landing.css' %}">
+{% endblock extralink %}
+
+
+
+{% block content %}
+<style>
+
+main.main-content {
+
+    background-image: url("{% static 'image/workshop_wallpaper.webp' %}");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    backdrop-filter: blur(10px);
+}
+
+
+</style>
+<main class="main-content">
+    <div class="container">
+
+        {% for i in data %}
+        <a href="#"  class="workshops-card">
+            <img src="{{i.banner.url}}" alt="{{i.name_en}}">
+            
+            
+            {% if lang == 'en' %}
+            <h1>{{i.name_en}}</h1>
+    
+            <p>{{i.description_en}}</p>
+            {% elif lang == 'ar' %}
+            <h1>{{i.name_ar}}</h1>
+            <p>{{i.description_ar}}</p>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock content %}
+    

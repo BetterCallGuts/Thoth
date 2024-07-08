@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{% if lang == "ar" %}
+الرئيسية
+
+
+{% elif lang == "en" %}
+Home
+{% endif %}
+{% endblock title %}
+
+{% block extralink %}
+{% endblock extralink %}
+
+{% block content %}
+
+<div class="mm">
+    <div class="left2" >
+
+        <div class="words2" >
+            {% if lang == 'en' %}
+
+            Welcome to Thoth Business Hub <br />
+            At Thoth Business Hub, we are dedicated to empowering businesses and entrepreneurs through comprehensive support and resources. Our mission is to be the cornerstone of your business success by offering expert knowledge, dynamic events, and personalized consultations.
+
+            {% elif lang == 'ar' %}
+            مرحبا بكم في تحوت الأعمال المحور
+في Thoth Business Hub، نحن ملتزمون بتمكين الشركات ورجال الأعمال من خلال الدعم والموارد الشاملة. مهمتنا هي أن نكون حجر الزاوية في نجاح عملك من خلال تقديم المعرفة المتخصصة والأحداث الديناميكية والاستشارات الشخصية.
+            {% endif %}
+        </div>
+        <a href="#" >  
+            Contact us
+        </a>
+    </div>
+
+    <div class="right2">
+        <img src="{% static '/image/line_loop1.png' %}" alt="line_loop" class="lowl">
+        <img src="{% static '/image/triangle.png'   %}" alt="triangle" class='sec_lowl' >
+    </div>
+</div>
+{% endblock content %}
+
+{% block extrascript %}
+{% endblock extrascript %}

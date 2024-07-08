@@ -1,0 +1,7 @@
+django-xhtml2pdf
+django-ckeditor-5
+django-jazzmin
+whitenoise
+gunicorn
+
+

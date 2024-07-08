@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block title %}{% if lang == 'ar' %} {{course.name_ar}}{% elif lang == 'en' %} {{course.name_en}}{% endif%} {% endblock title %}
+
+{% block extralink %}
+
+    <link rel="stylesheet" href="{% static 'css/pages/course_detail.css' %}">
+{% endblock extralink %}
+
+
+
+{% block content %}
+
+
+<main>
+
+    
+    <div class="left">
+
+        <img src="{{course.banner.url}}" alt="{{course.name_en}}">
+        {% if lang == "en" %}
+        <h1>{{course.name_en}}</h1>
+        
+        {% comment %}  {% endcomment %}
+        {% if course.isonsale %}
+            <s>Before: {{course.price}} EGP</s>
+            <p>After : {{course.onsale}} EGP </p>
+        {% else %}
+            <p>Price: {{course.price}} EGP</p>
+
+        {% endif %}
+
+        
+        {% comment %}  {% endcomment %}
+        {% elif lang == "ar" %}
+        <h1>{{course.name_ar}}</h1>
+        {% if course.isonsale %}
+            <s>السعر قبل الخصم : {{course.price}} جنية</s>
+            <p>بعد الخصم : {{course.onsale}}  جنية</p>
+        {% else %}
+            <p>سعر الدورة: {{course.price}} جنية</p>
+
+        {% endif %}
+
+        {% endif %}
+
+
+        
+    </div>
+
+    <div class="right">
+        
+        {% if lang == "en" %}
+
+            {% if aviable %}
+                <a href="{% url 'courses:video_detail' lang course.pk %}" class="payment">View Course</a>
+            {% else %}
+                <a href="{% url 'core:payment' lang  %}" class="payment"> Purchased</a>
+
+                {% endif %}
+
+        <p> instructor : <a href="{% url "courses:instructor_detail" lang  course.instructor.pk %}" class="instructor" >{{course.instructor.name_en}} </a></p>
+        <hr>
+        <p>{{course.description_en}}</p>
+        <hr>
+        
+            {% elif lang == "ar" %}
+            {% if aviable %}
+                <a href="{% url 'courses:video_detail' lang course.pk  %}" class="payment">شاهد الكورس</a>                
+
+            {% else %}
+            <a href="{% url 'core:payment' lang  %}" class="payment">شراء</a>
+            {% endif %}
+            <p> مقدم الدورة : <a href="{% url "courses:instructor_detail" lang  course.instructor.pk %}" class="instructor" >{{course.instructor.name_ar}} </a></p>
+            <hr>
+            <p>{{course.description_ar}}</p>
+            <hr>
+        {% endif %}
+    </div>
+
+</main>
+
+{% endblock content %}
+    

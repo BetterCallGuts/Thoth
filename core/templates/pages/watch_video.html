@@ -1,0 +1,65 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% if lang == 'ar' %} {{video.name_ar}}{% elif lang == 'en' %} {{video.name_en}}{% endif%} {% endblock title %}
+
+
+{% block extralink %}
+<link rel="stylesheet" href="{% static 'css/pages/video_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/courses.css' %}">
+{% endblock extralink %}
+{% block content %}
+<main>
+    
+    <div class="video-wrapper">
+        {% if lang == "en" %}
+        <h1>{{course.name_en}}</h1>
+        <h1>{{video.name_en}}</h1>
+
+        {% elif lang  == "ar" %}
+        <h1>{{course.name_ar}}</h1>
+        <h1>{{video.name_ar}}</h1>
+        {% endif %}
+        <div class="video-container">   
+            <video   controls />
+                <source src="{{video.video.url}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <p>
+
+            {% if lang == "en" %}
+                {{video.descr_en}}
+                <p> instructor : <a href="{% url "courses:instructor_detail" lang  course.instructor.pk %}" class="instructor" >{{course.instructor.name_en}} </a></p>
+            {% elif lang  == "ar" %}
+                {{video.descr_ar}}
+                <p> مقدم الدورة : <a href="{% url "courses:instructor_detail" lang  course.instructor.pk %}" class="instructor" >{{course.instructor.name_ar}} </a></p>
+
+            {% endif %}
+        </p>
+    </div>
+
+<hr>
+    <div class="wrapper">
+        <div class="container">
+        {% for vid in others %}
+        <a href='{% url "courses:video_detail" lang course.pk  vid.pk %}' class="card">
+    
+            <img src="{{vid.banner.url}}" alt="{{vid.name_en}}">
+            
+            <p class="name">{% if lang == "en" %} {{vid.name_en}}   {% elif lang  == "ar" %} {{vid.name_ar}} {% endif %}</p>
+
+            <p class="description">{% if lang == 'en' %} {{vid.descr_ar|truncatewords:10}} {% elif lang == "ar" %}  {{vid.descr_ar| truncatechars:60}}   {% endif %}</p>
+            
+        </a>
+    
+    
+        {% endfor %}
+        </div>
+    </div>
+
+</main>
+
+
+{% endblock content %}

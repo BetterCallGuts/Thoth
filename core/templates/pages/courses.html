@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block title %}{% if lang == 'ar' %}دورات تعليمية{% elif lang == 'en' %}Courses{% endif%} {% endblock title %}
+
+{% block extralink %}
+
+    <link rel="stylesheet" href="{% static 'css/pages/courses.css' %}">
+{% endblock extralink %}
+
+
+
+{% block content %}
+
+
+<main class="coursesss" />
+{% for courses in data %}
+    {% if courses.courses %}
+        
+    {% if lang == 'en' %}
+    <h1 class="categories">{{courses.name_en}}</h1>
+    {% elif lang == 'ar' %}
+    <h1 class="categories">{{courses.name_ar}}</h1>
+    {% endif %}
+    <div class="wrapper">
+        <div class="container">
+            {% for course in courses.courses %}
+            <a href='{% url "courses:course_detail" lang  course.pk %}' class="card">
+                
+                <img src="{{course.banner.url}}" alt="">
+                
+                <p class="name">{% if lang == "en" %} {{course.name_en}}   {% elif lang  == "ar" %} {{course.name_ar}} {% endif %}</p>
+                <p class="price">{% if course.isonsale %}<s>{% endif %} {{course.price}}EGP  {% if course.isonsale %}</s> {{course.onsale}}EGP {% endif %}  </p>
+                <p class="description">{% if lang == 'en' %} {{course.description_en|truncatewords:10}} {% elif lang == "ar" %}  {{course.description_ar| truncatechars:60}}   {% endif %}</p>
+                
+            </a>
+            
+            
+            {% endfor %}
+            </div>
+            </div>
+            
+        {% endif %}
+    {% endfor %}
+
+    {% comment %} <div class="categories">
+        
+        {% for category in categories %}
+        
+        <div class="item">
+            
+            {% if lang == 'en' %}
+            <a href="{% if chosen_course == category.name_en %}{% url 'core:couese_list_view' lang  %}{% else %}{% url 'core:couese_list_view' lang category.name_en %}{% endif%}" {% if chosen_course == category.name_en %}class="avtiveLink" {% else %} class="notchosen" {% endif %}>
+
+                {{category.name_en}}
+            </a>
+            {% elif lang == 'ar' %}
+            <a href="{% if chosen_course == category.name_en%}{% url 'core:couese_list_view' lang  %}{% else %}{% url 'core:couese_list_view' lang category.name_en %}{% endif%}" {% if chosen_course == category.name_en %}class="avtiveLink" {% else %} class="notchosen" {% endif %}>
+
+                {{category.name_ar }}
+            </a>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+        <!--  -->
+
+      
+
+
+    </div> {% endcomment %}
+</main>
+
+
+{% endblock content %}
+    

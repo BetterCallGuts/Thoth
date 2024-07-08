@@ -1,0 +1,69 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} 
+{% if lang == "en" %}
+
+{{instructor.name_en}}
+{% elif lang == "ar" %}
+{{instructor.name_ar}}
+
+
+{% endif %}
+{% endblock title %}
+
+{% block extralink %}
+<link rel="stylesheet" href="{% static 'css/pages/instructor_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/courses.css' %}">
+{% endblock extralink %}
+
+{% block content %}
+<main id="main__content">
+
+    <div class="left">
+
+        <img src="{{instructor.photo_banner.url}}" alt="{{instructor.name_en}}">
+        {% if lang == "en" %}
+        <h1>{{instructor.name_en}}</h1>
+        <p>
+            <b>Speciality:</b> {{instructor.speciality.name_en}}                                                    
+        </p>
+                <p>{{instructor.bio_en}}</p>
+
+        {% elif lang  == "ar" %}
+        <h1>{{instructor.name_ar}}</h1>
+        <p> التخصص: <b>{{instructor.speciality.name_ar}}</b>                                                    </p>
+        <p>{{instructor.bio_ar}}</p>
+        {% endif %}
+
+
+        
+    </div>
+
+    <div class="right">
+        <div class="wrapper">
+        <div class="container">
+        {% for course in courses %}
+        <a href='{% url "courses:course_detail" lang course.pk %}' class="card">
+
+            <img src="{{course.banner.url}}" alt="">
+            
+            <p class="name">{% if lang == "en" %} {{course.name_en}}   {% elif lang  == "ar" %} {{course.name_ar}} {% endif %}</p>
+            <p class="price">{% if course.isonsale %}<s>{% endif %} {{course.price}}EGP  {% if course.isonsale %}</s> {{course.onsale}}EGP {% endif %}  </p>
+            <p class="description">{% if lang == 'en' %} {{course.description_en|truncatewords:10}} {% elif lang == "ar" %}  {{course.description_ar| truncatechars:60}}   {% endif %}</p>
+            
+        </a>
+
+
+        {% endfor %}
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+{% endblock content %}
+    

@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% if lang == 'ar' %} الاجتماعات{% elif lang == 'en' %} meetups{% endif%} {% endblock title %}
+
+
+
+{% block extralink %}
+<link rel="stylesheet" href="{% static 'css/pages/meetups.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/courses.css' %}">
+{% endblock extralink %}
+{% block content %}
+<main>
+
+    <div class="wrapper">
+        <div class="container">
+        {% for meetup in meetups %}
+        <a href='{% url "core:meetup" lang meetup.pk %}' class="card">
+    
+            <img src="{{meetup.banner.url}}" alt="">
+            
+            <p class="name">{% if lang == "en" %} {{meetup.meetupname_en}}   {% elif lang  == "ar" %} {{meetup.meetupname_ar}} {% endif %}</p>
+            <p class="price">{% if meetup.is_sold %}<s>{% endif %} {{meetup.price}} {% if meetup.is_sold %}</s> {% endif %}</p>
+            <p class="description">{% if lang == 'en' %} {{meetup.description_en|truncatewords:10}} {% elif lang == "ar" %}  {{meetup.description_ar| truncatechars:60}}   {% endif %}</p>
+            
+        </a>
+    
+    
+        {% endfor %}
+        </div>
+    </div>
+
+
+</main>
+
+{% endblock content %}
