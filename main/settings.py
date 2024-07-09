@@ -107,7 +107,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # SMTP server address
 EMAIL_PORT = 587  # SMTP server port
 EMAIL_USE_TLS = True  # Use TLS (Transport Layer Security)
 EMAIL_USE_SSL = False  # Use SSL (Secure Sockets Layer), set to False if using TLS
-EMAIL_HOST_USER = 'summit.thoth.hub@gmail.com'  # Your email address
+EMAIL_HOST_USER = ' '  # Your email address
 EMAIL_HOST_PASSWORD = 'tnce adqh mymv iwkg '  # Your email password
 
 customColorPalette = [

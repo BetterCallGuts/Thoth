@@ -25,6 +25,7 @@ Summits
 {% block content %}
 <style>
 
+
 body{
         background-color: #000;
         /* overflow-x: hidden; */
@@ -32,29 +33,30 @@ body{
     }
 
     main#main__content{
-        background: url("{% static 'image/BACKGROUND.png'%}") center center no-repeat;
+        background: url("/static/image/BACKGROUND.png") center center no-repeat;
 
         background-size: contain;
         padding: 300px 40px;
 
 
     }
-    
+
     .container{
         display: flex;
         flex-wrap: wrap;
         position: relative;
         gap: 20px;
         justify-content: center;
-        
+
     }
     .card{
         display: flex   ;
         flex-direction: column;
-        justify-content: center;
+
         align-items: center;
         width: 240px;
         gap: 14px;
+        /* height: 400px ; */
     }
     .container p{
     /* display: flex; */
@@ -62,7 +64,7 @@ body{
     /* flex-wrap: wrap; */
     text-align: center;
 
-    
+
 }
 
 p.name{
@@ -74,7 +76,8 @@ p.description{
     font-family: "29LT" , "sans-serif";
     color: #53906F;
     width: 50%;
-    line-height: 20px;
+    line-height: 25px;
+    font-size:20px;
 
 }
 .card img{
@@ -238,7 +241,7 @@ p{
         padding:20px;
 
     }
-    
+
 
 }
 </style>
