@@ -1,0 +1,105 @@
+div.wrapper{
+    margin:40px;
+    display: flex;
+}
+.wrapper .container{
+    display: flex;
+    
+    flex-wrap: wrap;
+    width: 90%;
+    gap: 40px;
+}
+
+
+
+
+.card{
+    display: flex;
+    width: 400px;
+    height: 400px;
+    border: 1px solid var(--theme-main-color);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden ;
+
+
+
+}
+.card p.name {
+    position: absolute;
+    color: white;
+    bottom: 10px ;
+    font-weight: 800;
+    text-shadow: 0 0 10px black;
+    font-size: 20px;
+    /* margin: 0 auto; */
+    transform: translate(60px);
+    font-family: "29LT", sans-serif;
+    transition: .4s;
+/*  */
+}
+.card p{
+    transition: .4s;
+    font-family: "29LT", sans-serif;
+    color: wheat;
+    position: absolute;
+
+}
+.price {
+
+    bottom: -10px;
+    visibility: hidden;
+    
+}
+.description{
+    bottom: -70px;
+    visibility: hidden;
+    width: 300px;
+    line-height: 20px;
+    font-weight: 600;
+}
+.card img{
+    width: 100%;
+    height: 100%;
+    transition: .4s ease-in;
+}
+.card:hover img {
+    filter: blur(3px);
+}
+
+.card:hover p {
+    transform: translateY(-120px)  translate(60px)    ;
+    visibility: visible;
+    text-shadow: 0 0 10px black;
+    
+}
+
+.avtiveLink{
+    background-color: var(--black);
+    color: var(--theme-main-color) !important;
+    border-radius: 10px;
+
+}
+.avtiveLink:hover{
+    border: 1px solid  var(--black) !important;
+    background: var(--theme-main-color) !important;
+    color: var(--black) !important;
+}
+
+.categories{
+    font-family: 'Anton', sans-serif;
+
+    font-size: 28px;
+    /* text-shadow: 0 0 5px rgba(0, 0, 0, 0.44); */
+
+    color: var(--theme-main-color);
+}
+
+
+main.coursesss{
+    display: flex;
+    flex-direction: column;
+    padding:100px;
+    gap: 40px;
+    background-color: rgb(204, 213, 222);
+}
