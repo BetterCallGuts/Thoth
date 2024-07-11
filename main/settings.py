@@ -2,7 +2,7 @@
 from pathlib import Path
 import os
 
-SITE_DOMAIN = "www.example.com"
+SITE_DOMAIN = "thothhub.net"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-b-4+)*3*53upekv)olpam4ap1g+$j!nqsedl8nj3%ix^cw3r9z
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["thothhub.net", "127.0.0.1"]
 
 
 

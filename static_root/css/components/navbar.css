@@ -1,5 +1,5 @@
 /*  */
-.navbar {
+.navbarr {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,8 +8,11 @@
     width: 90%;
     margin: 0 auto;
     font-family: "29LT", sans-serif;
+    
 }
-
+body{
+    background-color: var(--black) !important;
+}
 .navbar__act-button {
     display: flex;
     align-items: center;
@@ -61,4 +64,10 @@
     width : 120%;
     height: 8px;
     background: var(--theme-main-color);
+}
+
+.navbar-toggler{
+    color: var(--theme-main-color);
+    border: 1px solid white;
+    background: white;
 }

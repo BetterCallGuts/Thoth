@@ -1,4 +1,6 @@
 {% load static %}
+
+{% comment %} 
 <div class="navbar" id="Navbar" style="z-index: 1000;">
     <!-- ACT Button -->
     {% if not user.is_authenticated %}
@@ -41,7 +43,7 @@
             {% endif %}
             </a>
         </li>
-                <li class="{% if active == 'courses' %}active{% endif %}">
+            <li class="{% if active == 'courses' %}active{% endif %}">
             <a href="{% url 'courses:courses_categories' lang %}" class="" dir="rtl">
             {% if lang == "ar" %}
             دورات تدريبية
@@ -87,7 +89,7 @@
             
             </a>
         </li>
-        {% comment %} 31 /5 يوم نادى الجزيرة {% endcomment %}
+       
         <li>
             <a href="/" dir="rtl">
             {% if lang == "ar" %}
@@ -129,4 +131,146 @@
 </div>
 
 
+ {% endcomment %}
 
+ <div class="ftco-section navbarr" id="Navbar" >
+    
+    <div class="container">
+        <nav class="navbar navbar-expand-lg ftco_navbar " id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <div class="logo">
+                    <div class="logo__image">
+                        <img src="{% static  'image/logo_sm.png' %}" alt="Thoth Logo" />
+                    </div>
+                    <div class="logo__text">
+                        Thoth<br />Business<br />Hub
+                    </div>
+                </div>  
+                </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span> 
+          </button>
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul  dir="rtl"  class="navbar-nav ml-auto mr-md-3 navbar__links-list">
+                
+                <li class="nav-item {% if active == 'home' %}active{% endif %}">
+                    <a href="/" dir="rtl" class="nav-link">
+                    {% if lang == "ar"  %}
+                    الرئيسية
+                    {% elif lang == "en" %}
+                    Home
+                    {% endif %}
+                    </a>
+        
+                </li>
+                <li class="nav-item {% if active == 'about_thoth' %}active{% endif %}">
+                    <a class="nav-link" href="/" dir="rtl">
+                    {% if lang == "ar" %}
+                        عن Thoth
+                    {% elif lang == "en" %}
+                        About Thoth
+                    {% endif %}
+                    </a>
+                </li>  
+                <li class="nav-item {% if active == 'courses' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'courses:courses_categories' lang %}"  dir="rtl">
+                    {% if lang == "ar" %}
+                    دورات تدريبية
+                    {% elif lang == "en" %}
+                        Courses
+                    {% endif %}
+                    </a>
+                    
+                </li>            
+                <li class="nav-item {% if active == 'meetups' %}active{% endif %}">
+                    <a class="nav-link" href="{% url "core:meetups" lang %}" dir="rtl">
+                    
+                        {% if lang == "ar" %}
+                        لقاءات
+                        
+                        {% elif lang == "en" %}
+                        Meetups
+                        {% endif %}
+                    
+                    </a>
+                </li>
+
+
+                <li class="nav-item {% if active == 'summits' %}active{% endif %}">
+                    <a class="nav-link" href="{% url "core:summit" lang %}" dir="rtl">
+                    
+                        {% if lang == "ar" %}
+                        مؤتمرات
+                        
+                        {% elif lang == "en" %}
+                        Summits
+                        {% endif %}
+                    
+                    </a>
+                </li>
+                <li class="nav-item {% if active == 'workshops' %}active{% endif %}" />
+                <a class="nav-link" href="{% url 'workshops:workshop' lang %}" dir="rtl">
+                
+                    {% if lang == "ar" %}
+                    ورشة عمل
+                    
+                    {% elif lang == "en" %}
+                    Workshops
+                    {% endif %}
+                
+                </a>
+            </li>
+            <li class="nav-item {% if active == 'b2b' %}active{% endif %}">
+                <a class="nav-link" href="" dir="rtl">
+                {% if lang == "ar" %}
+                B2B
+                {% elif lang == "en" %}
+                B2B
+                {% endif %}    
+                
+                </a>
+            </li>
+            <li class="nav-item" dir="ltr" >
+                {% if lang == "ar" %}
+                <a  href="{% url 'core:change_lang' %}" dir="ltr">
+                    English?
+                </a>
+                {% elif lang == "en" %}
+                
+                <a href="{% url 'core:change_lang' %}" dir="ltr">
+                    العربية؟
+                </a>
+                {% endif %}    
+                
+            </li>
+
+            {% if not user.is_authenticated %}
+    <a href="{% url 'core:login' lang %}" class="navbar__act-button">
+
+        {% if lang == "en" %}
+        Login
+        {% elif lang == "ar" %}
+
+        تسجيل الدخول
+        {% endif %}
+    </a>
+    {% else %}
+    <form action="{% url 'core:logout'  %}" method="post">
+        {% csrf_token %}
+        <input 
+        style="color: var(--white);outline:none; background:rgba(0,0,0,1)"
+        type="submit" class="navbar__act-button" value="{% if lang == "en" %}Logout{% elif lang == "ar" %}تسجيل الخروج{% endif %}">
+    </form>
+    {% endif %}
+            
+        
+           
+        </ul>
+          </div>
+        </div>
+      </nav>
+
+</div>
+
+</div>
