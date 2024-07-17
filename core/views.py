@@ -371,11 +371,11 @@ def check_qr_valid_or_not(request, uuid=None):
             return render(request, 'global/qrcode_response.html', {'response': 'This ticket does not exist', 'status': 'error'})
 
         if ticket.summitticket.is_used:
-            return render(request, 'global/qrcode_response.html', {'response': 'Ticket is already used', 'status': 'info'})
+            return render(request, 'global/qrcode_response.html', {'response': mark_safe(f'Ticket is already used  <h1> {ticket.summitticket.name} </h1>'), 'status': 'info'})  
 
         ticket.summitticket.is_used = True
         ticket.summitticket.save()
-        return render(request, 'global/qrcode_response.html', {'response': f'Ticket is valid, welcome {ticket.summitticket.name}', 'status': 'success'})
+        return render(request, 'global/qrcode_response.html', {'response': mark_safe(f'Ticket is valid, welcome <h1> {ticket.summitticket.name} </h1>'), 'status': 'success'})   
 
     return render(request, 'global/qrcode_response.html', {'response': 'You are not allowed here', 'status': 'error'})
 
