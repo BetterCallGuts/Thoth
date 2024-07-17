@@ -368,15 +368,15 @@ def check_qr_valid_or_not(request, uuid=None):
         try:
             ticket = models.QrcodeForTicket.objects.get(uuid=uuid)
         except models.QrcodeForTicket.DoesNotExist:
-            return render(request, 'qrcode_response.html', {'response': 'This ticket does not exist', 'status': 'error'})
+            return render(request, 'global/qrcode_response.html', {'response': 'This ticket does not exist', 'status': 'error'})
 
         if ticket.summitticket.is_used:
-            return render(request, 'qrcode_response.html', {'response': 'Ticket is already used', 'status': 'info'})
+            return render(request, 'global/qrcode_response.html', {'response': 'Ticket is already used', 'status': 'info'})
 
         ticket.summitticket.is_used = True
         ticket.summitticket.save()
-        return render(request, 'qrcode_response.html', {'response': f'Ticket is valid, welcome {ticket.summitticket.name}', 'status': 'success'})
+        return render(request, 'global/qrcode_response.html', {'response': f'Ticket is valid, welcome {ticket.summitticket.name}', 'status': 'success'})
 
-    return render(request, 'qrcode_response.html', {'response': 'You are not allowed here', 'status': 'error'})
+    return render(request, 'global/qrcode_response.html', {'response': 'You are not allowed here', 'status': 'error'})
 
 "qrcode_response.html"
