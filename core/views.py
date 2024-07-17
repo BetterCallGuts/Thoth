@@ -176,22 +176,33 @@ def render_to_pdf(template, context):
 
 # ###############################################################################
 def send_them_email(request:HttpRequest, queryset:QuerySet[models.SummitTicket]):
-    msg = models.Messages.objects.first()
+    # msg = models.Messages.objects.first()
+
     for obj in queryset:
 
-        the_code = models.QrcodeForTicket.objects.get(summitticket=obj)
-        context = {
-        "url_my_image" : settings.SITE_DOMAIN + the_code.qrcode.url,
-        "msg" : msg,
-        "his_name" : obj.name
-    }
-        html_message = render_to_string('emails/summit_temp.html', context)
-        from_email = settings.EMAIL_HOST_USER
-        plaintext_message = strip_tags(html_message)
-        message = EmailMultiAlternatives(subject="Thoth summit",body= plaintext_message, from_email= from_email, to= [obj.email])  
-        message.attach_alternative(html_message, "text/html")
-        message.send()
 
+      the_code = models.QrcodeForTicket.objects.get(summitticket=obj)
+
+      context = {
+        "url_my_image" : settings.SITE_DOMAIN + the_code.qrcode.url,
+        # "msg" : msg,
+        "his_name" : obj.name,
+    }   
+      
+      subject =  f"Welcome to {obj.summit.name_en}"
+      if obj.ticket_type == "S" or obj.ticket_type == None or obj.ticket_type != "V":
+            context["ticket_type"] =  settings.SITE_DOMAIN +  "/static/image/standard_ticket.jpeg" 
+
+            html_message = render_to_string('emails/summit_temp.html', context)
+      elif obj.ticket_type == "V":
+        context["ticket_type"] =  settings.SITE_DOMAIN +  "/static/image/Vip_ticket.jpeg"
+        html_message = render_to_string('emails/summit_temp_vip.html', context)
+
+      plaintext_message = strip_tags(html_message)
+      from_email = settings.EMAIL_HOST_USER
+      message = EmailMultiAlternatives(subject=subject , body=plaintext_message, from_email= from_email, to= [obj.email])  
+      message.attach_alternative(html_message, "text/html")
+      message.send()
 
 def send_test_email(request:HttpRequest):
     # 
@@ -202,6 +213,8 @@ def send_test_email(request:HttpRequest):
     qrcode = models.QrcodeForTicket.objects.get(pk=int(the_tiket))
     summitticket = models.SummitTicket.objects.filter(email=ticket_email)
     summitticket = summitticket[0]
+    summitticket.sended_mail = True
+    summitticket.save()
     message = models.Messages.objects.get(pk=int(the_message))
     message = mark_safe(message.Text)
 

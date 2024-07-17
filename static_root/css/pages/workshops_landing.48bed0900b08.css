@@ -1,0 +1,63 @@
+/* main.main-content {
+    display: flex   ;
+    flex-wrap: wrap;
+    padding: 40px; 
+     gap: 30px; 
+} 
+*/
+.container {
+    backdrop-filter: blur(1px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 40px ;
+    
+
+}
+
+.container a img{
+     width: 100%;
+}
+
+a.workshops-card h1{
+    font-size: 30px;
+    font-family: "Anton", sans-serif;
+    color: var(--theme-main-color);
+
+}
+a.workshops-card p , a.workshops-card h1{
+    text-align: center;
+}
+
+a.workshops-card p{
+    font-family: "29LT", sans-serif;
+    line-height: 30px;
+    color: var(--white);
+    font-weight: 800;
+    font-size: 28px;
+    text-shadow: 0 0 10px black;
+
+}
+
+
+a.workshops-card{
+
+        display: flex;
+        /* justify-content: center; */
+    width: 60%;
+    flex-direction: column;
+    align-self: center;
+    gap: 20px;
+    justify-self: center;
+}
+
+a.workshops-card img{
+    height: auto;
+        width: 100%;   
+
+    transition: .4s ease-in;
+}
+
+a:hover img{
+        filter: blur(3px);
+}

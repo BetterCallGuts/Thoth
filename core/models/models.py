@@ -219,6 +219,12 @@ class SummitTicket(models.Model):
     job_title = models.CharField(max_length=255, null=True, blank=True)
     sended_mail = models.BooleanField(default=False)
 
+    choices_for_ticket_type = [
+        ("V", "VIP"),
+        ("S", "Standard"),
+        ]
+    ticket_type = models.CharField(choices=choices_for_ticket_type,
+        max_length=255, null=True, blank=True)
     # howmany = models.IntegerField(default=0)    
     
     def more(self):
@@ -261,6 +267,7 @@ class QrcodeForTicket(models.Model):
 
     def chose_message(self):
                         mesgs = Messages.objects.all()
+                        return "stoped for now"
                         return mark_safe(f""" 
                         <select  
                                         style="width:300px;"
@@ -274,6 +281,7 @@ class QrcodeForTicket(models.Model):
 
 """)
     def send_mail(self):
+        return "stoped for now"
 
         return mark_safe(f"""
 

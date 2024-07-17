@@ -110,7 +110,9 @@ class SummitTicketAdminStyle(admin.ModelAdmin):
     inlines      = [
         qrcodeSummitTicketInlineStack,
     ]
-    list_filter = ["is_used", "did_he_pay" , "summit"]
+    list_filter = ["is_used", "did_he_pay" 
+                , "summit", "sended_mail", 
+                "ticket_type"]
     actions = [
         "reset_payment_and_used_tickets_and_send_email",
         "send_email",
