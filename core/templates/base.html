@@ -43,7 +43,16 @@
 
 
 
-
+    {% if user.is_staff %}
+    <a style="
+    position:fixed;z-index: 200;right: 20px;bottom: 20px; border: 1px solid black;
+    border-radius: 100%;
+    " href="{% url 'admin:index' %}"
+    
+    class="admin-logo">
+        <img src="{% static  'vendor/adminlte/img/AdminLTELogo.png' %}" />
+    </a>
+    {% endif %}
     {% block extrascript %}
 
     {% endblock extrascript %}

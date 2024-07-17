@@ -15,6 +15,7 @@ from django_xhtml2pdf.utils import generate_pdf
 from io import BytesIO
 from xhtml2pdf import pisa
 from django.template.loader import get_template
+from django.db.models.query import QuerySet
 import os
 
 # Landing Page Request Handle Function
@@ -172,6 +173,25 @@ def render_to_pdf(template, context):
    if not pdf.err:
        return HttpResponse(result.getvalue(), content_type='application/pdf')
    return None
+
+# ###############################################################################
+def send_them_email(request:HttpRequest, queryset:QuerySet[models.SummitTicket]):
+    msg = models.Messages.objects.first()
+    for obj in queryset:
+
+        the_code = models.QrcodeForTicket.objects.get(summitticket=obj)
+        context = {
+        "url_my_image" : settings.SITE_DOMAIN + the_code.qrcode.url,
+        "msg" : msg,
+        "his_name" : obj.name
+    }
+        html_message = render_to_string('emails/summit_temp.html', context)
+        from_email = settings.EMAIL_HOST_USER
+        plaintext_message = strip_tags(html_message)
+        message = EmailMultiAlternatives(subject="Thoth summit",body= plaintext_message, from_email= from_email, to= [obj.email])  
+        message.attach_alternative(html_message, "text/html")
+        message.send()
+
 
 def send_test_email(request:HttpRequest):
     # 
@@ -336,6 +356,8 @@ def check_qr_valid_or_not(req:HttpRequest,  uuid=None) -> HttpResponse:
         ticket = models.QrcodeForTicket.objects.get(uuid=uuid)
         if ticket.summitticket.is_used == True:
             return HttpResponse("Ticket is already used")
+        ticket.summitticket.is_used = True
+        ticket.summitticket.save()
         return HttpResponse(f"Ticket is valid , welcome{ticket.summitticket.name} <br />")
     return HttpResponse("You are not allowed Here")
 

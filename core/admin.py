@@ -7,7 +7,7 @@ from .models import models
 from .models.workshops import WorkShopsCategory
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-
+from .views import send_them_email
 
 
 admin.site.unregister(User,   )
@@ -103,10 +103,29 @@ class SummitTicketAdminStyle(admin.ModelAdmin):
     inlines      = [
         qrcodeSummitTicketInlineStack,
     ]
+    list_filter = ["is_used", "did_he_pay" , "summit"]
+    actions = [
+        "reset_payment_and_used_tickets_and_send_email",
+        "send_email",
+    ]
+
+    def reset_payment_and_used_tickets_and_send_email(self, request, queryset):
+        queryset.update(did_he_pay=False, is_used=False, sended_mail=False)
+        self.message_user(request, f"Tickets reseted")
+
+    def send_email(self, request, queryset):
+        
+        queryset.update(sended_mail=True)
+
+        send_them_email(request, queryset)
+
+
 class SpeakersAdminStyle(admin.ModelAdmin):
     list_display = ["more", "name_ar", "name_en",  ]
     list_display_links = ("more",)
     search_fields = ["name_ar", "name_en"]
+
+
 
 admin.site.register(models.Instructor     , InstructorAdminStyle  )
 admin.site.register(models.Courses        , CoursesAdminStyle     )  

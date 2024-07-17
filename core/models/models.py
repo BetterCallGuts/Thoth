@@ -9,6 +9,7 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 from django.core.files import File
 import uuid
+import os
 
 from django.urls import reverse
 from django.conf import settings
@@ -214,7 +215,9 @@ class SummitTicket(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     email = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
+    did_he_pay = models.BooleanField(default=False)
     job_title = models.CharField(max_length=255, null=True, blank=True)
+    sended_mail = models.BooleanField(default=False)
 
     # howmany = models.IntegerField(default=0)    
     
@@ -226,7 +229,7 @@ class SummitTicket(models.Model):
 
 class Messages(models.Model):
 
-    Text = CKEditor5Field(blank=True)
+    Text       = CKEditor5Field(blank=True)
     created_in = models.DateField(default=datetime.now, editable=False)
     
     def __str__(self):
@@ -339,6 +342,11 @@ const pk = document.createElement('input');
         verbose_name        = "SummitTicket"
         verbose_name_plural = "SummitTickets"
 
+    def delete(self, *args, **kwargs):
+        if self.qrcode:
+            if os.path.isfile(self.qrcode.path):
+                os.remove(self.image.path)
+        super(QrcodeForTicket, self).delete(*args, **kwargs)
 
 
     send_mail.short_description = "Click on button to send"
