@@ -12,6 +12,13 @@ from .views import send_them_email
 
 admin.site.unregister(User,   )
 
+
+
+
+admin.site.site_header= "Thoth"
+admin.site.site_title = "Thoth"
+admin.site.index_title = "Thoth"
+admin.site.site_url = "https://thoth.net"
 # ----------- inline stacks
 class VideoInlineStack(admin.StackedInline):
     

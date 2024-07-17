@@ -201,3 +201,10 @@ CKEDITOR_5_CONFIGS = {
 }
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+JAZZMIN_SETTINGS = {
+    "copyright": "omar",
+    "copyright_url": "omarhosnay09@gmail.com",
+}
