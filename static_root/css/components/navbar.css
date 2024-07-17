@@ -63,11 +63,21 @@ body{
     left: -10%;
     width : 120%;
     height: 8px;
-    background: var(--theme-main-color);
+    background: var(--theme-main-color) !important;
 }
 
 .navbar-toggler{
     color: var(--theme-main-color);
     border: 1px solid white;
     background: white;
+}
+
+.navbarr .nav-item a:hover{
+    color: var(--theme-main-color) !important;
+}
+.admin-logo{
+    transition: .4s;
+}
+.admin-logo:hover{
+    transform: scale(1.1);
 }
