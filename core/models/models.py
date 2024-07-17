@@ -304,7 +304,7 @@ delete this_is_my_spicial_form_omarhosnayAbdelmotelb;
             event.preventDefault();
 
             // Check if the id_email has a value
-            if (id_email && id_email.value) {
+            if (id_email && i`d_email.value) {
                 // Create a hidden input element
                 const hiddenInput = document.createElement('input');
                 hiddenInput.type = 'hidden';

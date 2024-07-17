@@ -359,19 +359,24 @@ def speaker(req: HttpRequest, lang=None, pk: int=None) -> HttpResponse:
     return  render(req, "pages/speaker.html", context=context)
 
 
-def check_qr_valid_or_not(req:HttpRequest,  uuid=None) -> HttpResponse:
-    if req.user.is_staff:
 
-        if uuid == None:
-            return redirect(
-                reverse("core:landing", args=["en"])
-            )
-        ticket = models.QrcodeForTicket.objects.get(uuid=uuid)
-        if ticket.summitticket.is_used == True:
-            return HttpResponse("Ticket is already used")
+def check_qr_valid_or_not(request, uuid=None):
+    if request.user.is_staff or request.user.is_superuser:
+        if uuid is None:
+            return redirect(reverse("core:landing", args=["en"]))
+
+        try:
+            ticket = models.QrcodeForTicket.objects.get(uuid=uuid)
+        except models.QrcodeForTicket.DoesNotExist:
+            return render(request, 'check_qr.html', {'response': 'This ticket does not exist', 'status': 'error'})
+
+        if ticket.summitticket.is_used:
+            return render(request, 'check_qr.html', {'response': 'Ticket is already used', 'status': 'info'})
+
         ticket.summitticket.is_used = True
         ticket.summitticket.save()
-        return HttpResponse(f"Ticket is valid , welcome{ticket.summitticket.name} <br />")
-    return HttpResponse("You are not allowed Here")
+        return render(request, 'check_qr.html', {'response': f'Ticket is valid, welcome {ticket.summitticket.name}', 'status': 'success'})
 
+    return render(request, 'check_qr.html', {'response': 'You are not allowed here', 'status': 'error'})
 
+"qrcode_response.html"

@@ -132,59 +132,95 @@
            
 		</tbody>
 	</table><!-- End -->
-    
+    <style>
+	body {
+		font-family: Arial, sans-serif;
+		background-color: #f4f4f4;
+		color: #333;
+		margin: 0;
+		padding: 0;
+	}
+	.container {
+		width: 100%;
+		max-width: 600px;
+		margin: 20px auto;
+		background-color: #ffffff;
+		border-radius: 8px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		padding: 20px;
+	}
+	.header {
+		text-align: center;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #dddddd;
+	}
+	.header h1 {
+		margin: 0;
+		color: #007BFF;
+	}
+	.content {
+		padding: 20px;
+	}
+	.content h2 {
+		color: #007BFF;
+	}
+	.content p {
+		line-height: 1.6;
+	}
+	.footer {
+		text-align: center;
+		padding-top: 20px;
+		border-top: 1px solid #dddddd;
+		color: #777777;
+	}
+    </style>
 	<hr>
+	<div class="container">
+        <div class="header">
+            <h1>Welcome to Thoth Business Summit 2024!</h1>
+        </div>
+        <div class="content">
+            <p>Dear {{his_name}},</p>
+            <p>Thank you for purchasing a ticket to the Thoth Business Summit 2024! We are excited to have you join us for a day of insightful discussions and networking opportunities.</p>
+            <h2>Ticket Type: [Standard]</h2>
+            <h2>Event Details:</h2>
+            <p><strong>Date:</strong> July 19, 2024</p>
+            <p><strong>Location:</strong> Gezert El Ward Club, Mansoura<br>
+            <a href="https://maps.app.goo.gl/8ADzKk1Jt3w16Gog7?g_st=com.google.maps.preview.copy" target="_blank">View on Google Maps</a></p>
+            <p><strong>Registration Time:</strong> 10:00 AM</p>
+            <p>Please note that no food or drinks are allowed to be carried into the hall. We will provide refreshments during the event.</p>
+            <p>You must show the QR code to be able to enter the gates.</p>
+            <p>We are honored to have you join this unique summit.</p>
+            <p>Thank you for purchasing a ticket to the Thoth Business Summit 2024! We are excited to have you join us for a day of insightful discussions and networking opportunities.</p>
+        </div>
+        <div class="footer">
+            <p>Best regards,<br>Thoth Business Summit Team</p>
+        </div>
+    </div>
 
-<pre>
-	*Subject: Welcome to Thoth Business Summit 2024!*
-
-
-
-	Dear {{his_name}},
-
-	Thank you for purchasing a ticket to the Thoth Business Summit 2024! We are excited to have you join us for a day of insightful discussions and networking opportunities.
-
-	*Ticket Type:* [Standard]
-
-	*Event Details:*
-	- *Date:* July 19, 2024
-	- *Location:* Gezert El Ward Club , Mansoura
-	- ⁠https://maps.app.goo.gl/8ADzKk1Jt3w16Gog7?g_st=com.google.maps.preview.copy
-	- *Registration Time:* 10:00 AM
-
-	Please note that no food or drinks are allowed to be carried into the hall. We will provide refreshments during the event.
-
-	You must to show the QR code to able to enter the gates.
-
-	We are honor to have you join this unique summit.
-
-	Thank you for purchasing a ticket to the Thoth Business Summit 2024! We are excited to have you join us for a day of insightful discussions and networking opportunities.
-</pre>
-
-<hr>
-
-<pre>
-	
-	‎عزيز /عزيزتى {{his_name}},
-
-	‎شكراً لكم على شراء تذكرة لحضور قمة ثوث للأعمال 2024! نحن متحمسون لانضمامكم إلينا في يوم مليء بالمناقشات المثمرة وفرص التواصل.
-	
-	‎*نوع التذكرة:* [عادية]
-	
-	‎*تفاصيل الحدث:*
-	‎- *التاريخ:* 19 يوليو 2024
-	‎- *المكان:* نادى جزيرة الورد ، المنصورة
-	‎- *وقت التسجيل:* 10:00 صباحاً
-	
-	‎يرجى ملاحظة أنه لا يُسمح بإحضار الطعام أو المشروبات إلى القاعة. سنقوم بتوفير المرطبات خلال الحدث.
-	
-	يرجى التنبيه على أنه لايسمح بالدخول إلا لحاملى هذه الرسالة فقط 
-	
-	‎نتطلع إلى الترحيب بكم في قمة ثوث للأعمال!
-	
-	‎أطيب التحيات،
-	‎فريق عمل ثوث للأعمال
-</pre>
+    <hr>
+    <div class="container">
+        <div class="header">
+            <h1>مرحباً بكم في قمة ثوث للأعمال 2024!</h1>
+        </div>
+        <div class="content">
+            <p>عزيز/عزيزتي {{his_name}},</p>
+            <p>شكراً لكم على شراء تذكرة لحضور قمة ثوث للأعمال 2024! نحن متحمسون لانضمامكم إلينا في يوم مليء بالمناقشات المثمرة وفرص التواصل.</p>
+            <h2>نوع التذكرة: [عادية]</h2>
+            <h2>تفاصيل الحدث:</h2>
+            <p><strong>التاريخ:</strong> 19 يوليو 2024</p>
+            <p><strong>المكان:</strong> نادي جزيرة الورد، المنصورة<br>
+            <a href="https://maps.app.goo.gl/8ADzKk1Jt3w16Gog7?g_st=com.google.maps.preview.copy" target="_blank">عرض على خرائط جوجل</a></p>
+            <p><strong>وقت التسجيل:</strong> 10:00 صباحاً</p>
+            <p>يرجى ملاحظة أنه لا يُسمح بإحضار الطعام أو المشروبات إلى القاعة. سنقوم بتوفير المرطبات خلال الحدث.</p>
+            <p>يجب عليكم إظهار رمز الاستجابة السريعة للدخول إلى القاعة.</p>
+            <p>نحن فخورون بانضمامكم لهذه القمة الفريدة.</p>
+            <p>مع أطيب التحيات،<br>فريق عمل قمة ثوث للأعمال</p>
+        </div>
+        <div class="footer">
+            <p>Best regards,<br>Thoth Business Summit Team</p>
+        </div>
+    </div>
 </body>
 
 </html>
