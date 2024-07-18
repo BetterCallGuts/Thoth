@@ -17,6 +17,7 @@ from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.db.models.query import QuerySet
 import os
+import time
 
 # Landing Page Request Handle Function
 def landing(req:HttpRequest, lang=None) -> HttpResponse:
@@ -177,7 +178,7 @@ def render_to_pdf(template, context):
 # ###############################################################################
 def send_them_email(request:HttpRequest, queryset:QuerySet[models.SummitTicket]):
     # msg = models.Messages.objects.first()
-
+    counter = 0
     for obj in queryset:
 
 
@@ -202,7 +203,12 @@ def send_them_email(request:HttpRequest, queryset:QuerySet[models.SummitTicket])
       from_email = settings.EMAIL_HOST_USER
       message = EmailMultiAlternatives(subject=subject , body=plaintext_message, from_email= from_email, to= [obj.email])  
       message.attach_alternative(html_message, "text/html")
-      message.send()
+      message.send() 
+      counter += 1
+      time.sleep(1)
+      if counter == 10:
+        time.sleep(10)
+        counter = 0
 
 def send_test_email(request:HttpRequest):
     # 
