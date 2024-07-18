@@ -17,7 +17,7 @@ MEDIA_ROOT  = "media_root"
 
 SECRET_KEY = 'django-insecure-b-4+)*3*53upekv)olpam4ap1g+$j!nqsedl8nj3%ix^cw3r9z'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["thothhub.net", "127.0.0.1"]
 
@@ -30,22 +30,29 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     "core",
     "workshops",
     "courses",
     "django_ckeditor_5"
 ]
+# STORAGES = {
+#     # ...
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
@@ -200,10 +207,9 @@ CKEDITOR_5_CONFIGS = {
     }
 }
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
-
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 JAZZMIN_SETTINGS = {
     "copyright": "omarhosnay09@gmail.com",
 
