@@ -17,7 +17,7 @@ MEDIA_ROOT  = "media_root"
 
 SECRET_KEY = 'django-insecure-b-4+)*3*53upekv)olpam4ap1g+$j!nqsedl8nj3%ix^cw3r9z'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["thothhub.net", "127.0.0.1"]
 
