@@ -9,7 +9,7 @@ from random                     import choice
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
 from django.utils.html import mark_safe, strip_tags
-from django.contrib.messages import success ,error
+from django.contrib.messages import success ,error, info
 from django.template.loader import render_to_string
 from django_xhtml2pdf.utils import generate_pdf
 from io import BytesIO
@@ -181,34 +181,36 @@ def send_them_email(request:HttpRequest, queryset:QuerySet[models.SummitTicket])
     counter = 0
     for obj in queryset:
 
+        try:
+            the_code = models.QrcodeForTicket.objects.get(summitticket=obj)
 
-      the_code = models.QrcodeForTicket.objects.get(summitticket=obj)
+            context = {
+                "url_my_image" : settings.SITE_DOMAIN + the_code.qrcode.url,
+                # "msg" : msg,
+                "his_name" : obj.name,
+            }   
+            
+            subject =  f"Welcome to {obj.summit.name_en}"
+            if obj.ticket_type == "S" or obj.ticket_type == None or obj.ticket_type != "V":
+                    context["ticket_type"] =  settings.SITE_DOMAIN +  "/static/image/standard_ticket.jpeg" 
 
-      context = {
-        "url_my_image" : settings.SITE_DOMAIN + the_code.qrcode.url,
-        # "msg" : msg,
-        "his_name" : obj.name,
-    }   
-      
-      subject =  f"Welcome to {obj.summit.name_en}"
-      if obj.ticket_type == "S" or obj.ticket_type == None or obj.ticket_type != "V":
-            context["ticket_type"] =  settings.SITE_DOMAIN +  "/static/image/standard_ticket.jpeg" 
+                    html_message = render_to_string('emails/summit_temp.html', context)
+            elif obj.ticket_type == "V":
+                context["ticket_type"] =  settings.SITE_DOMAIN +  "/static/image/Vip_ticket.jpeg"
+                html_message = render_to_string('emails/summit_temp_vip.html', context)
 
-            html_message = render_to_string('emails/summit_temp.html', context)
-      elif obj.ticket_type == "V":
-        context["ticket_type"] =  settings.SITE_DOMAIN +  "/static/image/Vip_ticket.jpeg"
-        html_message = render_to_string('emails/summit_temp_vip.html', context)
-
-      plaintext_message = strip_tags(html_message)
-      from_email = settings.EMAIL_HOST_USER
-      message = EmailMultiAlternatives(subject=subject , body=plaintext_message, from_email= from_email, to= [obj.email])  
-      message.attach_alternative(html_message, "text/html")
-      message.send() 
-      counter += 1
-      time.sleep(1)
-      if counter == 10:
-        time.sleep(10)
-        counter = 0
+            plaintext_message = strip_tags(html_message)
+            from_email = settings.EMAIL_HOST_USER
+            message = EmailMultiAlternatives(subject=subject , body=plaintext_message, from_email= from_email, to= [obj.email])  
+            message.attach_alternative(html_message, "text/html")
+            message.send() 
+            counter += 1
+            time.sleep(1)
+            if counter == 10:
+                time.sleep(10)
+                counter = 0
+        except:
+            info(request, f"{obj.email} is not a valid email")
 
 def send_test_email(request:HttpRequest):
     # 

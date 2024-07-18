@@ -106,7 +106,7 @@ class SummitAdminStyle(admin.ModelAdmin):
 class SummitTicketAdminStyle(admin.ModelAdmin):
     list_display = ["more", "user", "summit", "is_used","name", "email", "phone_number", "job_title"]
     list_display_links = ("more",)
-    search_fields = ["name", "user", "summit__name_ar", "summit__name_en", "email", "phone_number", "job_title"]
+    search_fields = ["name",  "summit__name_ar", "summit__name_en", "email", "phone_number", "job_title"]
     inlines      = [
         qrcodeSummitTicketInlineStack,
     ]
