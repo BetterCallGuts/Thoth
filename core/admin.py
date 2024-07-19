@@ -124,7 +124,7 @@ class SummitTicketAdminStyle(admin.ModelAdmin):
 
     def send_email(self, request, queryset):
         
-        queryset.update(sended_mail=True)
+       
 
         send_them_email(request, queryset)
 

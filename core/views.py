@@ -204,6 +204,8 @@ def send_them_email(request:HttpRequest, queryset:QuerySet[models.SummitTicket])
             message = EmailMultiAlternatives(subject=subject , body=plaintext_message, from_email= from_email, to= [obj.email])  
             message.attach_alternative(html_message, "text/html")
             message.send() 
+            obj.sended_mail = True
+            obj.save()
             counter += 1
             time.sleep(1)
             if counter == 10:
